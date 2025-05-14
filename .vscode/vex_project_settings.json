@@ -1,0 +1,18 @@
+{
+	"extension": {
+		"version": "0.6.1",
+		"json": 2
+	},
+	"project": {
+		"name": "Virus_Auto",
+		"description": "Port 7: Shooter, Port 9: Pneumatics, Port 11: Mini accumulator, Port 1: Left Drive, Port 6, Right Drive, Port 2: Top accumulator, Port 12: Bottom Accumulator, Port 3&4: Touch LED",
+		"creationDate": "1/1/2025, 10:34:47 AM",
+		"platform": "IQ2",
+		"language": "python",
+		"slot": 2,
+		"sdkVersion": "IQ2_1_0_0_20",
+		"python": {
+			"main": "src/main.py"
+		}
+	}
+}
