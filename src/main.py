@@ -254,8 +254,7 @@ def auto_2():
     while shooter_sensor.object_distance() >= 10:
         sleep(50)  # Pause briefly to allow for sensor reading.
         
-    print("ball is shot")
-    sleep(500)  # Pause briefly to ensure the ball is shot.
+    sleep(2000)  # Pause briefly to ensure the ball is shot.
     
     mini_acc.stop()  # Stop the mini accumulator after shooting.
     
