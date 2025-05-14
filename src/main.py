@@ -34,9 +34,8 @@ ball_sensor = Distance(Ports.PORT4)  # Initialize a distance sensor on port 4 fo
 # Gyro sensor for orientation tracking (not preferred due to inaccuracy)
 gyro = Gyro(Ports.PORT10)  # Initialize a gyro sensor on port 10 for orientation tracking.
 
-# Optical sensor for detecting ball color and position
-shooter_sensor = Optical(Ports.PORT8)  # Initialize an optical sensor on port 8 for ball color detection.
-shooter_sensor.set_light(LedStateType.ON)  # Activate the sensor's light to enhance detection accuracy.
+# Distcance sensor for detecting ball color and position
+shooter_sensor = Distance(Ports.PORT8)  # Initialize a distance sensor on port 8 for ball color detection.
 
 #* Motor setup for ball handling and movement
 # Bottom accumulator for initial ball collection and transfer
@@ -152,7 +151,7 @@ def auto_1():
     shooter.spin_for(f, 750, DEGREES, True)  # Shoot the ball by spinning the shooter forward.
     
     # Ensure the ball is correctly positioned before shooting
-    while shooter_sensor.hue() <= 30 or shooter_sensor.hue() >= 45:  # Wait until the ball is detected by the shooter sensor.
+    while shooter_sensor.object_distance() >= 10:
         sleep(50)  # Pause briefly to allow for sensor reading.
     
     sleep(300)  # Pause briefly to ensure the ball is shot.
@@ -252,9 +251,10 @@ def auto_2():
     bottom_acc.spin(f, 100, p)  # Start the bottom accumulator to position the ball for shooting.
     
     # Ensure the ball is correctly positioned before shooting
-    while shooter_sensor.hue() <= 30 or shooter_sensor.hue() >= 45:  # Wait until the ball is detected by the shooter sensor.
+    while shooter_sensor.object_distance() >= 10:
         sleep(50)  # Pause briefly to allow for sensor reading.
         
+    print("ball is shot")
     sleep(500)  # Pause briefly to ensure the ball is shot.
     
     mini_acc.stop()  # Stop the mini accumulator after shooting.
@@ -288,10 +288,10 @@ def auto_2():
         bottom_acc.spin(f, 100, p)  # Start the bottom accumulator to position the ball for shooting.
         
         # Ensure the ball is correctly positioned before shooting
-        while shooter_sensor.hue() <= 30 or shooter_sensor.hue() >= 45:  # Wait until the ball is detected by the shooter sensor.
+        while shooter_sensor.object_distance() >= 10:
             sleep(50)  # Pause briefly to allow for sensor reading.
         sleep(500)  # Pause briefly to ensure the ball is shot.
-        while shooter_sensor.hue() <= 30 or shooter_sensor.hue() >= 45:  # Wait until the ball is detected by the shooter sensor.
+        while shooter_sensor.object_distance() >= 10:
             sleep(50)  # Pause briefly to allow for sensor reading.
         sleep(500)  # Pause briefly to ensure the ball is shot.
         mini_acc.stop()  # Stop the mini accumulator after shooting.
