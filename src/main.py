@@ -20,7 +20,7 @@ d = DEGREES  # Shorthand for the DEGREES unit to simplify code readability.
 p = PERCENT  # Shorthand for the PERCENT unit to simplify code readability.
 forwards = False  # Flag to track forward movement, used for logic control.
 turn_amt = 0  # Variable to store the amount of turn, used for precise movement control.
-drive_percent = 30  # Initial drive speed percentage, adjustable for fine-tuning robot speed.
+drive_percent = 38  # Initial drive speed percentage, adjustable for fine-tuning robot speed.
 gyro_turn = 0  # Variable for gyro-based turning, though not used due to gyro issues.
 est_balls_scored = 0  # Counter for estimated balls scored, used for performance tracking.
 
@@ -132,8 +132,9 @@ def auto_1():
     left_drive.stop()  # Stop the left drive motor to halt movement.
     right_drive.stop()  # Stop the right drive motor to halt movement.
     
+    brain.timer.reset()
     # Move the robot back until it is close to the back wall
-    while back_distance.object_distance() > 10:  # Continue until the robot is within 10 units of the back wall.
+    while back_distance.object_distance() > 50 and brain.timer.time() <= 4000:  # Continue until the robot is within 10 units of the back wall.
         left_drive.spin(r, drive_percent, p)  # Adjust the left drive motor to move in reverse.
         right_drive.spin(f, 100, p)  # Adjust the right drive motor to move forward.
         sleep(50)  # Pause briefly to allow for sensor reading.
@@ -232,7 +233,7 @@ def auto_2():
     right_drive.stop()
     
     # Use the back distance sensor to align with the wall
-    while back_distance.object_distance() > 50:  # Continue until the robot is within 50 units of the back wall.
+    while back_distance.object_distance() > 50 and brain.timer.time() <= 4000: # Continue until the robot is within 50 units of the back wall.
         left_drive.spin(r, 50, p)  # Adjust the left drive motor to move in reverse slowly.
         right_drive.spin(f, 50, p)  # Adjust the right drive motor to move forward slowly.
         sleep(50)  # Pause briefly to allow for sensor reading.
@@ -277,7 +278,7 @@ def auto_2():
         right_drive.stop()  # Stop the right drive motor to halt movement.
 
         # Use the back distance sensor to align with the wall
-        while back_distance.object_distance() > 50:  # Continue until the robot is within 50 units of the back wall.
+        while back_distance.object_distance() > 50 and brain.timer.time() <= 4000:  # Continue until the robot is within 50 units of the back wall.
             left_drive.spin(r, 100, p)  # Adjust the left drive motor to move in reverse at full speed.
             right_drive.spin(f, 100, p)  # Adjust the right drive motor to move forward at full speed.
             sleep(50)  # Pause briefly to allow for sensor reading.
